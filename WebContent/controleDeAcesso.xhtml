@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://ww.w3.org/1999/xhtml"  xmlns:f="http://xmlns.jcp.org/jsf/core"  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+xmlns:jsf="http://xmlns.jcp.org/jsf" lang="pt-br" >
+	
+	<ui:composition template="layout.xhtml">
+		<ui:param name="title" value="Controle de Acesso"/>
+		<ui:define name="conteudo">
+			<h:form action="">
+				<fieldset>
+					<legend>Parâmetros de Acesso</legend>
+					
+					<label for="matricula">Matricula:</label> <br />
+					<h:inputText value="#{controleAcessoBean.matricula}" id="matricula" maxlength="64" label="Matricula">
+					</h:inputText> <br />
+						
+					<label for="rg">RG:</label> <br />
+					<h:inputText value="#{controleAcessoBean.rg}" id="rg" maxlength="64" label="RG">
+					</h:inputText> <br />
+						
+				</fieldset>
+				<br />
+				<h:commandButton class="sub" type="submit" value="Registrar acesso" action="#{controleAcessoBean.registrarAcesso()}" />
+			</h:form>
+	
+	
+		</ui:define>
+	</ui:composition>
+</html>

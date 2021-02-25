@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://ww.w3.org/1999/xhtml"  xmlns:f="http://xmlns.jcp.org/jsf/core"  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+xmlns:jsf="http://xmlns.jcp.org/jsf" lang="pt-br" >
+	
+	<ui:composition template="layout.xhtml">
+		<ui:param name="title" value="#{alunoBean.titulo}"/>
+		<f:metadata>
+			<f:viewParam name="matricula" value="#{alunoBean.matricula}"/>
+			<f:viewAction action="#{alunoBean.carregar}"/>
+		</f:metadata>
+		<ui:define name="conteudo">
+			
+			<h:form>
+				<h:inputHidden value = "#{alunoBean.aluno.matricula}"/> 
+				<fieldset>
+				<legend>Dados pessoais</legend>
+					<label for="nome">Nome:</label> <br />
+					<h:inputText value="#{alunoBean.aluno.nome}" id="nome" maxlength="64" label="Nome">
+						<f:validateLength minimum="2" maximum="64"/>
+					</h:inputText> <br />
+					<label for="">Sexo</label> <br />
+					<h:selectOneMenu value="#{alunoBean.aluno.sexo}" id="sexo">
+						<f:selectItems value="#{dataBean.sexos}"  /> 
+					</h:selectOneMenu> <br />
+					
+					<label for="rg">RG:</label> <br />
+					<h:inputText value="#{alunoBean.aluno.rg}" id="rg" maxlength="10" label="RG">
+						<f:validateRequired /> 
+						<f:validateLongRange minimum="100000" maximum="9999999999"/>	
+					</h:inputText> <br />
+				
+					<label for="dataNascimento">Data de Nascimento:</label> <br />
+					<h:inputText value="#{alunoBean.aluno.dataNascimento}" id="dataDeNascimento" label="Data de Nascimento">  
+   						<f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+   						<f:validateRequired/>  
+					</h:inputText>
+				</fieldset>
+				
+				
+				<br />
+				
+				
+				<fieldset>
+					<legend>Situação</legend>
+					<label for="situacao">Situacao</label> <br />
+					<h:selectOneMenu value="#{alunoBean.aluno.situacao}">
+						<f:selectItems value="#{dataBean.situacoes}"  /> 
+					</h:selectOneMenu>
+				</fieldset>
+				
+				<br />
+				
+				<fieldset>
+					<legend>Endereço</legend>
+					
+					<label for="rua">Rua:</label> <br />
+					<h:inputText value="#{alunoBean.aluno.endereco.rua}" id="rua" maxlength="128" label="Rua">
+						<f:validateLength minimum="2" maximum="128" />
+					</h:inputText> <br />
+					
+					<label for="numero">Número:</label> <br />
+					<h:inputText value="#{alunoBean.aluno.endereco.numero}" id="numero" maxlength="6" label="Número">
+						<f:validateLongRange minimum="1" maximum="999999" />
+					</h:inputText> <br /> 
+					
+					<label for="complemento">Complemento:</label> <br />
+					<h:inputText value="#{alunoBean.aluno.endereco.complemento}" id="complemento" maxlength="32" label="Complemento">
+						<f:validateLength maximum="32" />
+					</h:inputText> <br /> 
+					
+					<label for="cidade">Cidade:</label> <br />
+					<h:inputText value="#{alunoBean.aluno.endereco.cidade}" id="cidade" maxlength="64" label="Cidade">
+						<f:validateLength minimum="2" maximum="64" />
+					</h:inputText> <br />
+					
+					<label for="estado">Estado:</label> <br />
+					<h:selectOneMenu value="#{alunoBean.aluno.endereco.estado.sigla}" id="estado" label="Estado">
+						<f:selectItem itemLabel="Escolha..." itemValue=""/>
+						<f:selectItems value="#{dataBean.estados}" var="e" itemLabel="#{e.nome}" itemValue="#{e.sigla}" />
+						<f:validateRequired /> 
+					</h:selectOneMenu> <br />
+					
+					
+					
+					<label for="cep">CEP:</label> <br />
+					<h:inputText value="#{alunoBean.aluno.endereco.cep}" id="cep" maxlength="8" label="Cep">
+						<f:validateRequired />
+						<f:validateLongRange minimum="10000000" maximum="99999999" />
+					</h:inputText> <br />
+				</fieldset>
+				
+				<br />
+				
+				<fieldset>
+					<legend>Contato</legend>
+					<label for="email">E-mail</label> <br />
+					<h:inputText value="#{alunoBean.aluno.email}" id="email" maxlength="64" label="Email"> 
+						<f:validateLength  maximum="64" />
+						<f:validateRegex pattern=".+@.+" />
+					</h:inputText> <br />
+					
+					<label for="telefoneCeludarDDD">Telefone Celular</label> <br />
+					<h:inputText value="#{alunoBean.aluno.telefone.dddCelular}" size="2" id="dddCel" maxlength="2" label="DDD Celular">
+						<f:validateRequired />
+						<f:validateLongRange minimum="10" maximum="99"/>
+					</h:inputText>&#160;
+					<h:inputText value="#{alunoBean.aluno.telefone.numeroCelular}" id="numeroCel" maxlength="9" label="Telefone Celular"> 
+						<f:validateRequired />
+						<f:validateLongRange minimum="10000000" maximum="99999999"/>
+					</h:inputText><br />
+					
+					<label for="telefoneFixoDDD">Telefone Fixo</label> <br />
+					<h:inputText value="#{alunoBean.aluno.telefone.dddFixo}" size="2" id="dddFixo" maxlength="2" label="DDD Fixo">
+						<f:validateLongRange minimum="10" maximum="99"/>
+					</h:inputText>&#160;
+					<h:inputText value="#{alunoBean.aluno.telefone.numeroFixo}" id="numeroFixo" maxlength="9" label="Telefone Fixo">
+						<f:validateLongRange minimum="10000000" maximum="99999999"/>
+					</h:inputText><br />
+				</fieldset>
+				
+				<br />
+				
+		
+				<h:commandButton class="sub" value="Gravar" type="submit" action="#{alunoBean.gravar()}" />&#160;
+				<h:button value="Relatório de entrada e saída" outcome="relatoriosDeEntradaSaida?matricula=#{alunoBean.aluno.matricula}"
+					rendered="#{alunoBean.matricula != null}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

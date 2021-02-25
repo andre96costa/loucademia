@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://ww.w3.org/1999/xhtml"  xmlns:f="http://xmlns.jcp.org/jsf/core"  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+xmlns:jsf="http://xmlns.sun.org/jsf" lang="pt-br" >
+<h:head>
+	<meta charset="ISO-8859-1"/>
+	<title>Loucademia</title>
+	<link rel="stylesheet" type="text/css" href="css/loucademiaStyle.css" />
+</h:head>
+<body>
+	<!-- CABEÇALHO - INICIO -->
+	<header>
+		<img alt="loucademia" src="images/Loucademia_Logotipo.png"/>
+		<nav>
+			<div>
+				<h:link value="Novo Aluno" outcome="dadosAluno"/><br />
+				<h:link value="Pesquisa de Aluno" outcome="pesquisaDeAluno?clear=true"/><br />
+				<h:link value="Controle de acesso" outcome="controleDeAcesso"/><br />
+				<h:link value="Relatório de entrada e saída" outcome="relatoriosDeEntradaSaida"/><br />
+				<h:link value="Relatórios de Situações" outcome="relatoriosDeSituacoes?clear=true"/><br />
+			</div>
+		</nav>
+	</header>
+	<!-- CABEÇALHO - FIM -->
+	
+	<h1>#{title}</h1>
+			
+	<h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}">
+		<div id="infoMessage">
+			<h:messages />
+		</div>
+	</h:panelGroup>
+			
+	<br />
+	
+	<ui:insert name="conteudo"/>
+	
+</body>
+</html>
